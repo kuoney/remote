@@ -38,7 +38,7 @@ if (!empty($data)) {
 <form method="post">
 	<input type="submit" style="height:80px; width:150px" name="power_on" value="Power On" />
 	<input type="submit" style="height:80px; width:150px" name="power_off" value="Power Off" />
-	<br>
+	<br><br>
 	<input type="submit" style="height:80px; width:150px" name="chup" value="Channel Up" />
 	<input type="submit" style="height:80px; width:150px" name="chdw" value="Channel Down" />
 </form>
