@@ -1,0 +1,61 @@
+Sharp Aquos Remote Control Project
+
+Description
+-----------
+I have a Sharp Aquos LCD TV (model: LC-42D85U) which I bought without a remote.
+They gave me a discount and I figured I could use the cable box's remote so why
+not, right?
+
+Well that worked for quite a long time until I cancelled my u-verse service and
+decided to cut the cord. I bought an antenna for $7 which works great. However,
+I now have no remote. I wanted to use my DVD player's remote but that only works
+with Sony TVs (ggrrrr).
+
+So, go buy a universal remote, right? Yeah, that's certainly an easy answer. But
+I wanted to do a personal project while utilizing the awesome abilities of one
+of the i.mx processors. This was a perfect opportunity.
+
+The TV comes with an rs232 connection and a command set. The connection is 9600
+baud 8N1.
+
+This TV does not have IP control. So the idea is to connect an imx board to the
+TV via the rs232, then connect that board to the network. The board runs a
+webserver and has a "remote control" page. You can connect to this page from
+your phone or your laptop and click on the buttons. Then magic will convert
+these requests to rs232 commands to the TV.
+
+I would like to design this as modular as possible so I can write separate TV
+interfaces and talk to separate user interfaces. For example, one idea is to get
+siriproxy to work in my home network, and control the TV using siri commands.
+
+The high level design will hopefully look something like this:
+
+                                                                +
+                                                                |
+        +------------+   +------------+   +------------+        |
+        |            |   |            |   |            |        |
+        |   Siri     |   |    Web     |   | Terminal   |        |User Interfaces
+        |            |   |            |   |            |        |
+        |            |   |            |   |            |        |
+        +-----+------+   +-----+------+   +-----+------+        |
+              |                |                |               |
+              v                v                v               |
+        +----------------------------------------------+        |
+        |                                              |        |
+        |                                              |        |
+        |             COMMAND SERVER                   |        |Command Server
+        |                                              |        |
+        +------+----------------+---------------+------+        |
+               |                |               |               |
+               v                v               v               |
+        +------------+   +------------+   +------------+        |
+        |            |   |            |   |            |        |
+        |   Sharp    |   |    Sony    |   | Samsung    |        |TV Command Modules
+        |            |   |            |   |            |        |
+        |            |   |            |   |            |        |
+        +-----+------+   +-----+------+   +-----+------+        |
+        +-----v------+   +-----v------+   +-----v------+        |
+        |  rs232     |   |     IP     |   |   Magic    |        |Communication Layer
+        +------------+   +------------+   +------------+        |
+
+Note: Chart at http://www.asciiflow.com/#2109796029775891114/1773101722
