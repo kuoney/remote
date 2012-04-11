@@ -34,6 +34,7 @@ $data = $_POST['chdw'];
 if (!empty($data)) {
 	fwrite($fh, "CHDW1   \n");
 }
+fclose($fh);
 ?>
 <form method="post">
 	<input type="submit" style="height:80px; width:150px" name="power_on" value="Power On" />
