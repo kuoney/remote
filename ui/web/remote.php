@@ -11,27 +11,21 @@
 $out = "/dev/ttyUSB0";
 $fh = fopen($out, 'w') or die("File open error");
 
-$data = $_POST['power_on'];
-
-if (!empty($data)) {
+if (!empty($_POST['power_on'])) {
 	fwrite($fh, "POWR1   \n");
 }
 
-$data = $_POST['power_off'];
-
-if (!empty($data)) {
+if (!empty($_POST['power_off'])) {
+		fwrite($fh, "RSPW1   \n"); /* make sure we can wake it back up */
+	usleep(500000);
 	fwrite($fh, "POWR0   \n");
 }
 
-$data = $_POST['chup'];
-
-if (!empty($data)) {
+if (!empty($_POST['chup'])) {
 	fwrite($fh, "CHUP1   \n");
 }
 
-$data = $_POST['chdw'];
-
-if (!empty($data)) {
+if (!empty($_POST['chdw'])) {
 	fwrite($fh, "CHDW1   \n");
 }
 fclose($fh);
