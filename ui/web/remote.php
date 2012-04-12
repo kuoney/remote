@@ -16,7 +16,7 @@ if (!empty($_POST['power_on'])) {
 }
 
 if (!empty($_POST['power_off'])) {
-		fwrite($fh, "RSPW1   \n"); /* make sure we can wake it back up */
+	fwrite($fh, "RSPW1   \n"); /* make sure we can wake it back up */
 	usleep(500000);
 	fwrite($fh, "POWR0   \n");
 }
