@@ -55,7 +55,7 @@ done
 if [ -e /dev/ttyUSB0 ]
 then
 	echo "Configuring /dev/ttyUSB0"
-	chmod a+w /dev/ttyUSB0
+	chmod a+wr /dev/ttyUSB0
 fi
 
 if [ -e /home/web ]
