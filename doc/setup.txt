@@ -1,0 +1,52 @@
+SETUP
+
+++ i.mx50 webserver ++
+++++++++++++++++++++++
+
+I followed the instructions here:
+	http://imxcommunity.org/forum/topics/using-imx-as-a-webserver
+
+Get a new ltib installation and enable:
+	[ ] php
+	[ ] apache
+	[ ] mysql
+
+Deploy it on your board's SD card. I actually used NFS for the prototype.
+Once the project is stable (and pretty) I will deploy it on the SD card.
+
+++ Settings ++
+++++++++++++++
+
+There are two configuration files in the config/ directory:
+	httpd.conf  rc.local
+
+The changes to httpd.conf change the default directory. Specifically:
+
+	DocumentRoot "/home/web"
+	<Directory "/home/web">
+
+This way the pages will be served from /home/web directory on the target
+board. We also add remote.php to the default pages to serve list.
+
+	DirectoryIndex index.html index.html.var index.php remote.php
+
+The changes to rc.local set up the serial port and start the httpd daemon.
+
+	if [ -e /dev/ttyUSB0 ]
+	then
+		echo "Configuring /dev/ttyUSB0"
+		chmod a+w /dev/ttyUSB0
+	fi
+
+	if [ -e /home/web ]
+	then
+		echo "Starting apache..."
+		/usr/bin/httpd &
+	fi
+
+To deploy, you need to copy the ui/web/* from the repository to the target's
+/home/web directory. I accomplish this using the following command:
+
+	cp ui/web/* ~/bsp/mx50/ltib/rootfs/home/web/
+
+That's it!
