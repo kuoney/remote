@@ -57,5 +57,9 @@ then
 	echo "Configuring /dev/ttyUSB0"
 	chmod a+w /dev/ttyUSB0
 fi
-echo "Starting apache..."
-/usr/bin/httpd &
+
+if [ -e /home/web ]
+then
+	echo "Starting apache..."
+	/usr/bin/httpd &
+fi
