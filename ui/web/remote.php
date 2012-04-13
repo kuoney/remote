@@ -24,12 +24,7 @@ function send_command($button, $cmd, $fh)
 	return "height:80px; width:150px; background-color:#add8e6";
 }
 
-$style = array(
-	"height:80px; width:150px; background-color:#add8e6",
-	"height:80px; width:150px; background-color:#add8e6",
-	"height:80px; width:150px; background-color:#add8e6",
-	"height:80px; width:150px; background-color:#add8e6",
-);
+$style = array_fill(0, 8, "height:80px; width:150px; background-color:#add8e6");
 
 $out = "/dev/ttyUSB0";
 $fh = fopen($out, 'r+') or die("File open error");
@@ -38,14 +33,25 @@ $style[0] = send_command('power_on', "POWR1   \n", $fh);
 $style[1] = send_command('power_off', "POWR0   \n", $fh);
 $style[2] = send_command('chup', "CHUP1   \n", $fh);
 $style[3] = send_command('chdw', "CHDW1   \n", $fh);
+$style[4] = send_command('nbc', "DA2P1701\n", $fh);
+$style[5] = send_command('abc', "DA2P1101\n", $fh);
+$style[6] = send_command('fox', "DA2P5001\n", $fh);
+$style[7] = send_command('cbs', "DA2P0501\n", $fh);
 
 fclose($fh);
 ?>
 <form method="post">
 	<input type="submit" style="<?php echo $style[0]; ?>" name="power_on" value="Power On" />
 	<input type="submit" style="<?php echo $style[1]; ?>" name="power_off" value="Power Off" />
-	<br><br>
+	<br /><br />
 	<input type="submit" style="<?php echo $style[2]; ?>" name="chup" value="Channel Up" />
 	<input type="submit" style="<?php echo $style[3]; ?>" name="chdw" value="Channel Down" />
+	<br /><hr />
+	<p font=verdana> Popular Channels </p>
+	<input type="submit" style="<?php echo $style[4]; ?>" name="nbc" value="NBC" />
+	<input type="submit" style="<?php echo $style[5]; ?>" name="abc" value="ABC" />
+	<br /><br />
+	<input type="submit" style="<?php echo $style[6]; ?>" name="fox" value="FOX" />
+	<input type="submit" style="<?php echo $style[7]; ?>" name="cbs" value="CBS" />
 </form>
 </body></html>
