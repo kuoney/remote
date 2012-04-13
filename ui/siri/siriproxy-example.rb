@@ -28,11 +28,39 @@ class SiriProxy::Plugin::Example < SiriProxy::Plugin
   end 
 
   listen_for /test siri proxy/i do
-    say "Siri Proxy is up and running!" #say something to the user!
-    
+    say "Kursad, your Siri Proxy is up and running!" #say something to the user!
+
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
-  
+
+  listen_for /turn on the tv/i do
+    say "Turning on the TV" #say something to the user!
+	system("curl -F 'power_on=DOIT' http://172.16.1.49/remote.php");
+
+    request_completed #always complete your request! Otherwise the phone will "spin" at the user!
+  end
+
+  listen_for /turn off the tv/i do
+    say "Turning off the TV" #say something to the user!
+	system("curl -F 'power_off=DOIT' http://172.16.1.49/remote.php");
+
+    request_completed #always complete your request! Otherwise the phone will "spin" at the user!
+  end
+
+  listen_for /channel up/i do
+    say "Programming the channel up" #say something to the user!
+	system("curl -F 'chup=DOIT' http://172.16.1.49/remote.php");
+
+    request_completed #always complete your request! Otherwise the phone will "spin" at the user!
+  end
+
+  listen_for /channel down/i do
+    say "Programming the channel down" #say something to the user!
+	system("curl -F 'chdw=DOIT' http://172.16.1.49/remote.php");
+
+    request_completed #always complete your request! Otherwise the phone will "spin" at the user!
+  end
+
   #Demonstrate that you can have Siri say one thing and write another"!
   listen_for /you don't say/i do
     say "Sometimes I don't write what I say", spoken: "Sometimes I don't say what I write"
