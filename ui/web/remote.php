@@ -35,8 +35,6 @@ $out = "/dev/ttyUSB0";
 $fh = fopen($out, 'r+') or die("File open error");
 
 $style[0] = send_command('power_on', "POWR1   \n", $fh);
-send_command('power_off', "RSPW1   \n", $fh); /* make sure we can wake it back up */
-usleep(500000);
 $style[1] = send_command('power_off', "POWR0   \n", $fh);
 $style[2] = send_command('chup', "CHUP1   \n", $fh);
 $style[3] = send_command('chdw', "CHDW1   \n", $fh);
