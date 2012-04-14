@@ -61,18 +61,11 @@ class SiriProxy::Plugin::Example < SiriProxy::Plugin
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
 
-  listen_for /change channel to ([a-z]*)/i do |station|
+  listen_for /change channel ([a-z0-9]*) ([a-z]*)/i do |dummy, station|
     say "Tuning to #{station}" #say something to the user!
-	case station
-	when "NBC"
-		system("curl -F 'nbc=DOIT' http://172.16.1.49/remote.php");
-	when "ABC"
-		system("curl -F 'abc=DOIT' http://172.16.1.49/remote.php");
-	when "FOX"
-		system("curl -F 'fox=DOIT' http://172.16.1.49/remote.php");
-	when "CBS"
-		system("curl -F 'cbs=DOIT' http://172.16.1.49/remote.php");
-	end
+	# junk requests don't really hurt anything. do not discriminate.
+	# future-compatible!
+	system("curl -F '#{station.downcase}=DOIT' http://172.16.1.49/remote.php");
 
     request_completed #always complete your request! Otherwise the phone will "spin" at the user!
   end
