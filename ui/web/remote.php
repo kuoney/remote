@@ -40,7 +40,7 @@ $style[6] = send_command('fox', "DA2P5001\n", $fh, 150);
 $style[7] = send_command('cbs', "DA2P0501\n", $fh, 150);
 $style[8] = send_command('tv', "ITVD0   \n", $fh, 90);
 $style[9] = send_command('iphone', "IAVD1   \n", $fh, 90);
-$style[10] = send_command('dvd', "IAVD9   \n", $fh, 90);
+$style[10] = send_command('dvd', "IAVD7   \n", $fh, 90);
 
 fclose($fh);
 ?>
