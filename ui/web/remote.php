@@ -77,7 +77,7 @@
     overflow: hidden;
 }
 </style>
-</body>
+<body bgcolor="#669999">
 <?php
 function send_command($button, $cmd, $fh)
 {
