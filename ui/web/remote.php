@@ -82,7 +82,7 @@
 <?php
 function send_command($button, $cmd, $fh)
 {
-        if (!empty($_POST[$button])) {
+        if (!empty($_POST[$button . '_x'])) {
                 fwrite($fh, $cmd);
                 $ret = fgets($fh);
 
@@ -96,21 +96,22 @@ function send_command($button, $cmd, $fh)
         return "./buttons/yellow.png";
 }
 $out = "/dev/ttyUSB0";
-$fh = fopen($out, 'r+') or die("File open error");
+$fh = fopen($out, 'w+') or print_r(error_get_last()) & die();
 
 $button = array_fill(0, 12, "./buttons/yellow.png");
-$button[0] = send_command('power_on', "POWR1   \n", $fh);
-$button[1] = send_command('power_off', "POWR0   \n", $fh);
-$button[2] = send_command('chup', "CHUP1   \n", $fh);
-$button[3] = send_command('chdw', "CHDW1   \n", $fh);
-$button[4] = send_command('nbc', "DA2P1701\n", $fh);
-$button[5] = send_command('abc', "DA2P1101\n", $fh);
-$button[6] = send_command('fox', "DA2P5001\n", $fh);
-$button[7] = send_command('cbs', "DA2P0501\n", $fh);
-$button[8] = send_command('tv', "ITVD0   \n", $fh);
-$button[9] = send_command('iphone', "IAVD1   \n", $fh);
-$button[10] = send_command('dvd', "IAVD7   \n", $fh);
-$button[11] = send_command('chrome', "IAVD8   \n", $fh);
+$i = -1;
+$button[++$i] = send_command('power_on', "POWR1   \n", $fh);
+$button[++$i] = send_command('power_off', "POWR0   \n", $fh);
+$button[++$i] = send_command('chup', "CHUP1   \n", $fh);
+$button[++$i] = send_command('chdw', "CHDW1   \n", $fh);
+$button[++$i] = send_command('nbc', "DA2P1701\n", $fh);
+$button[++$i] = send_command('abc', "DA2P1101\n", $fh);
+$button[++$i] = send_command('fox', "DA2P5001\n", $fh);
+$button[++$i] = send_command('cbs', "DA2P0501\n", $fh);
+$button[++$i] = send_command('tv', "ITVD0   \n", $fh);
+$button[++$i] = send_command('appletv', "IAVD6   \n", $fh);
+$button[++$i] = send_command('dvd', "IAVD7   \n", $fh);
+$button[++$i] = send_command('chrome', "IAVD8   \n", $fh);
 
 fclose($fh);
 ?>
@@ -140,30 +141,6 @@ fclose($fh);
 
 
 <div class="outer">
-    <div class="container">
-        <div class="wraptocenter"> <span class="wrimg">
-                <div class="shrinkwrapImage">
-                    <div id="caption1" class="caption">Channel Up</div>
-                    <input type="image" name='chup' value='chup' src="<?php echo $button[2]; ?>" style="height:80px; width:150px" />
-                </div>
-            </span>
-
-        </div>
-    </div>
-    <div class="container">
-        <div class="wraptocenter"> <span class="wrimg">
-                <div class="shrinkwrapImage">
-                    <div id="caption2" class="caption">Channel Down</div>
-                    <input type="image" name='chdw' value='chdw' src="<?php echo $button[3]; ?>" style="height:80px; width:150px" />
-                </div>
-            </span>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="outer">
     <div class="container2">
         <div class="wraptocenter2"> <span class="wrimg2">
                 <div class="shrinkwrapImage">
@@ -177,8 +154,8 @@ fclose($fh);
     <div class="container2">
         <div class="wraptocenter2"> <span class="wrimg2">
                 <div class="shrinkwrapImage">
-                    <div id="caption1" class="caption">iPhone</div>
-                    <input type="image" name='iphone' value='iphone' src="<?php echo $button[9]; ?>" style="height:80px; width:75px" />
+                    <div id="caption1" class="caption">Apple TV</div>
+                    <input type="image" name='appletv' value='appletv' src="<?php echo $button[9]; ?>" style="height:80px; width:75px" />
                 </div>
             </span>
 
@@ -206,6 +183,27 @@ fclose($fh);
     </div>
 </div>
 
+<div class="outer">
+    <div class="container">
+        <div class="wraptocenter"> <span class="wrimg">
+                <div class="shrinkwrapImage">
+                    <div id="caption1" class="caption">Channel Up</div>
+                    <input type="image" name='chup' value='chup' src="<?php echo $button[2]; ?>" style="height:80px; width:150px" />
+                </div>
+            </span>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="wraptocenter"> <span class="wrimg">
+                <div class="shrinkwrapImage">
+                    <div id="caption2" class="caption">Channel Down</div>
+                    <input type="image" name='chdw' value='chdw' src="<?php echo $button[3]; ?>" style="height:80px; width:150px" />
+                </div>
+            </span>
+        </div>
+    </div>
+</div>
 
 
 <div class="outer">
