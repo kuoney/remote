@@ -110,7 +110,7 @@ $button[++$i] = send_command('fox', "DA2P5001\n", $fh);
 $button[++$i] = send_command('cbs', "DA2P0501\n", $fh);
 $button[++$i] = send_command('tv', "ITVD0   \n", $fh);
 $button[++$i] = send_command('appletv', "IAVD6   \n", $fh);
-$button[++$i] = send_command('dvd', "IAVD7   \n", $fh);
+$button[++$i] = send_command('dvd', "IAVD9   \n", $fh);
 $button[++$i] = send_command('chrome', "IAVD8   \n", $fh);
 
 fclose($fh);
